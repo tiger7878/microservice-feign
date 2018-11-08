@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.itmuch.cloud</groupId>
+    <artifactId>microservice-feign</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>microservice-discovery-eureka-server</module>
+        <module>microservice-provider-user</module>
+        <module>microservice-consumer-movie-feign</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <!--依赖版本号管理-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--spring-boot-dependencies版本号，通过spring-boot管理其他第三方依赖版本-->
+        <spring.boot.version>1.4.3.RELEASE</spring.boot.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--spring-cloud依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Camden.SR4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring-boot依赖-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <!--spring-boot的maven插件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!--统一在父工程写 打包插件，否则jar这些就没有打包进去-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

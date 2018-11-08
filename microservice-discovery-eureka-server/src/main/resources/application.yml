@@ -1,0 +1,10 @@
+server:
+  port: 8761
+eureka:
+  client:
+    register-with-eureka: false #自己不用注册到自己
+    fetch-registry: false #单点不需要同步
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ #Eureka Server的交互地址，注册和发现都需要用它
+  server:
+    enable-self-preservation: false #关闭自我保护机制，这样服务挂了以后，就可以直接发行，否则很长时间才发现。开发时false，生产时true
