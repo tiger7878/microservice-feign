@@ -13,12 +13,6 @@ import org.springframework.web.client.RestTemplate;
 @EnableFeignClients //启用Feign
 public class ConsumerMovieApplication {
 
-    @Bean
-    @LoadBalanced //标注具备负载均衡的能力
-    public RestTemplate restTemplate(){
-        return new RestTemplate();
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(ConsumerMovieApplication.class, args);
     }
